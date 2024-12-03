@@ -16,7 +16,7 @@ namespace SRED.IO.Task1.Api.Controllers
         [HttpGet(Name = "GetTimesheetStatus")]
         public List<SimpleObject> GetTimesheetStatus([FromQuery] DateTime? dateFrom, [FromQuery] DateTime? dateTo)
         {
-
+            _logger.Log(LogLevel.Debug, "GetTimesheetStatus");
             if (dateFrom == null || dateTo == null)
             {
                 return [
@@ -315,5 +315,19 @@ namespace SRED.IO.Task1.Api.Controllers
                 }
             };
         }
+    }
+
+
+    public class ProjectDto
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public string? CreatedBy { get; set; }
+        public bool IsIncluded { get; set; }
+        public string? IntegrationOf { get; set; }
+        public string? Description { get; set; }
+        public string? TotalHours { get; set; }
+        public string? TimeRecords { get; set; }
     }
 }
