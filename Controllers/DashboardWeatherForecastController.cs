@@ -329,5 +329,6 @@ namespace SRED.IO.Task1.Api.Controllers
         public string? Description { get; set; }
         public string? TotalHours { get; set; }
         public string? TimeRecords { get; set; }
+        public bool isDeleted { get; set; }
     }
 }

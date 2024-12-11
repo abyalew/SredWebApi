@@ -19,6 +19,12 @@ public class ProjectsController : ControllerBase
     {
         return _projectStore.GetProjects();
     }
+    
+    [HttpGet(Name = "GetPage")]
+    public Page<ProjectDto> GetPage([FromQuery]bool showArchived, [FromQuery] PageParam param)
+    {
+        return _projectStore.GetPage(showArchived, param);
+    }
 
     [HttpPost]
     public ProjectDto AddProject(ProjectDto projectDto)
@@ -42,5 +48,33 @@ public class ProjectsController : ControllerBase
         }
         return NotFound("Project not found");
     }
+    [HttpGet]
+    public IActionResult Delete(int id)
+    {
+        var success = _projectStore.Delete(id);
+        if (success)
+        {
+            return Ok(true);
+        }
+        return NotFound("Project not found");
+    }
     
+    [HttpGet]
+    public IActionResult Restore(int id)
+    {
+        var success = _projectStore.Restore(id);
+        if (success)
+        {
+            return Ok(true);
+        }
+        return NotFound("Project not found");
+    }
+}
+
+public class FiscalPeriodDto
+{
+    public int Id { get; set; }
+    public string? Name { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
 }
